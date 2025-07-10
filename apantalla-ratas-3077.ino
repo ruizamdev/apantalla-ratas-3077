@@ -3,7 +3,8 @@
 #include <LiquidCrystal.h>
 
 // LCD pin setup: RS, E, D4, D5, D6, D7
-LiquidCrystal lcd(10, 11, 12, 13, 22, 23);
+const int rs = 10, en = 11, d4 = 12, d5 = 13, d6 = 14, d7 = 15;
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 // Pin assignments
 const int pirPin = 2;                   // PIR sensor OUT
@@ -31,6 +32,7 @@ void setup() {
 
   // Display settings
   lcd.begin(16, 2);
+  // lcd.print("Hello world!");
   lcd.setCursor(0, 0);
   lcd.print("Apantalla Ratas");
   lcd.setCursor(0, 1);
@@ -78,6 +80,7 @@ void loop() {
       lcd.setCursor(0, 0);
       lcd.print("System Status:");
       lcd.setCursor(0, 1);
+      // lcd.print(millis() / 1000);
       lcd.print(systemArmed ? "ARMED" : "DISARMED");
     }
     previousButtonState = buttonState;
