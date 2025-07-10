@@ -120,17 +120,23 @@ void loop() {
       }
 
       digitalWrite(statusLedPin, HIGH); // solid ON while alarm active
+
+      bool currentButtonState = digitalRead(buttonPin);
+      if (currentButtonState != previousButtonState && (millis() - lastDebounceTime) > debounceDelay){
+        lastDebounceTime = millis();
+        if (currentButtonState == HIGH) {
+          systemArmed = false;
+          lcd.clear();
+          lcd.setCursor(0, 0);
+          lcd.print("System DISARMED");
+          lcd.setCursor(0, 1);
+          lcd.print("Alarm aborted");
+          break; // salimos del while
+        }
+        previousButtonState = currentButtonState;
+      }
     }
 
-    digitalWrite(buzzerPin, LOW);
-    alarmActive = false;
-    Serial.println("Alarm ended. Back to monitoring");
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("Back to standby");
-    lcd.setCursor(0, 1);
-    lcd.print("Monitoring...");
-
-    delay(2000); // cooldown
+    
   }
 }
