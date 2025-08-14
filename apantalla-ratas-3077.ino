@@ -58,6 +58,9 @@
 
 #include <LiquidCrystal.h>
 
+#include <DFRobotDFPlayerMini.h>
+DFRobotDFPlayerMini myDFPlayer;
+
 // LCD pin setup: RS, E, D4, D5, D6, D7
 // LCD pin configuration: RS, E, D4, D5, D6, D7
 // Configuración de pines para la pantalla LCD: RS, E, D4, D5, D6, D7
